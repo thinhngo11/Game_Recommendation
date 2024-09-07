@@ -4,7 +4,7 @@ import numpy as np
 import random
 import csv
 
-
+""" ACCURACY: for minumum curation = 50: 5%; """
 """ compute recommendation accuracy of the content-based recommendation """
 """ 
 FOR EACH USER (GAME-BASED): 

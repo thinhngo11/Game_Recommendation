@@ -39,7 +39,7 @@ tfidf_vectorizer = TfidfVectorizer(analyzer='word', strip_accents = 'unicode',st
 tfidf = tfidf_vectorizer.fit_transform(list(df['Game_description']))
 print("Complete training tfidf")
 #print(type(tfidf))
-print(tfidf)
+#print(tfidf)
 
 def content_based_recommend(game_id, max_number):
     related_docs = []
@@ -60,9 +60,3 @@ def content_based_recommend(game_id, max_number):
         return related_docs
     else:
         return [0] * (max_number+1)
-
-
-# predict = content_based_recommend(df[df['Game_id']==427520].index[0], 20)
-# list_predict_game = df.iloc[predict]['Game_name']
-# for i in list_predict_game:
-#     print(i)

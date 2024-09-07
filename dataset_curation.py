@@ -4,7 +4,7 @@ import random
 import csv
 
 def compute():
-    """ to create training and test datasets from rating.csv """
+    """ to create training and test datasets from rating.csv 80/20% and retaining train users if existed in test """
     df_rating = pd.read_csv("rating.csv")
     user_rating = pd.read_csv("user_rating.csv")
     # user_rating.columns = ["ID", "User_ID","Game_id", "Game_name","Rating"]
@@ -14,12 +14,25 @@ def compute():
     len_df =len(full_df_rating)
     #print(full_df_rating)
     #print(type(full_df_rating))
+
     train_df_rating = full_df_rating.take(np.random.permutation(len_df)[:int(0.8 * len_df)]) #80% of rating.csv
     test_df_rating = pd.concat([full_df_rating,train_df_rating]).drop_duplicates(keep=False) #the remaining 20%
-    print(train_df_rating["User_ID"], train_df_rating["Game_id"])
+    #print(train_df_rating["User_ID"], train_df_rating["Game_id"])
+
+    #exclude users in the test dataset but not in train dataset
+    train_users = train_df_rating["User_ID"].unique().tolist()
+    
+    mask = []
+    for index, row in test_df_rating.iterrows():
+        #print(f'index: {index}')
+        #print(row["User_ID"])
+        mask.append(False) if row["User_ID"] not in train_users else mask.append(True)
+    print(len(mask))
+
+    df_rating = test_df_rating[mask]
+
     train_df_rating.to_csv("train_df_rating.csv")
-    test_df_rating.to_csv("test_df_rating.csv")
-    #accuracy = 0.2%
+    df_rating.to_csv("test_df_rating.csv")
     quit()
     
     """ to create training and test datasets from rating.csv 

@@ -9,17 +9,22 @@ import random
 import csv
 import matplotlib 
 #import seaborn as sns
+import random_accuracy
 from content_based import content_based_recommend
 import collaborative_filtering_accuracy
 import content_based_accuracy
 
 #dataset_curation.compute()
+#quit()
+
+#print(f'random recommendation accuracy =  {random_accuracy.compute()} %')
+#quit()
 
 print(f'collaborative filtering accuracy = .2f {collaborative_filtering_accuracy.compute()} %')
 quit()
 
-print(f'content_based accuracy = {content_based_accuracy.compute()} %')
-quit()
+#print(f'content_based accuracy = {content_based_accuracy.compute()} %')
+#quit()
 
 views = Blueprint('views', __name__)
 
